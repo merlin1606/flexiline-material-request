@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Material Request Form</title>
+  <style>
+    body { font-family: Arial; margin: 30px; }
+    table { border-collapse: collapse; width: 100%; max-width: 1000px; }
+    th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    input[type="number"] { width: 70px; }
+    input[type="submit"] { margin-top: 20px; padding: 10px 20px; font-size: 16px; }
+  </style>
+</head>
+<body>
+
+  <h2>FLEXI LINE MATERIAL REQUEST</h2>
+  <p>Please select the materials needed and enter the quantity required.</p>
+
+  <form id="requestForm">
+    <table>
+      <tr>
+        <th>Trolley</th>
+        <th>Location</th>
+        <th>Part No</th>
+        <th>Material</th>
+        <th>Tick (Yes/No)</th>
+        <th>Quantity</th>
+      </tr>
+
+      <tr><td>FT1</td><td>1A</td><td>FYL04711</td><td>M14X1.5X35</td><td><input type="checkbox" name="material" value="M14X1.5X35"></td><td><input type="number" name="M14X1.5X35_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1B</td><td>FYL01111</td><td>M14X1.5X40</td><td><input type="checkbox" name="material" value="M14X1.5X40"></td><td><input type="number" name="M14X1.5X40_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1C</td><td>FYJ03211</td><td>M14X1.5X50</td><td><input type="checkbox" name="material" value="M14X1.5X50"></td><td><input type="number" name="M14X1.5X50_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1D</td><td>FYK01011</td><td>M14X1.5XNUT</td><td><input type="checkbox" name="material" value="M14X1.5XNUT"></td><td><input type="number" name="M14X1.5XNUT_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1E</td><td>FYR01110</td><td>M14 NORD WASHER</td><td><input type="checkbox" name="material" value="M14 NORD WASHER"></td><td><input type="number" name="M14 NORD WASHER_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1F</td><td>F3541410</td><td>M20X1.5XNUT</td><td><input type="checkbox" name="material" value="M20X1.5XNUT"></td><td><input type="number" name="M20X1.5XNUT_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1G</td><td>FYL01113</td><td>M14X1.5X65</td><td><input type="checkbox" name="material" value="M14X1.5X65"></td><td><input type="number" name="M14X1.5X65_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1H</td><td>FYJ03411</td><td>M14X1.5X75</td><td><input type="checkbox" name="material" value="M14X1.5X75"></td><td><input type="number" name="M14X1.5X75_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1I</td><td>F3563015</td><td>M22X2.5XNUT</td><td><input type="checkbox" name="material" value="M22X2.5XNUT"></td><td><input type="number" name="M22X2.5XNUT_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1J</td><td>X1207715</td><td>DOWEL PIN</td><td><input type="checkbox" name="material" value="DOWEL PIN"></td><td><input type="number" name="DOWEL PIN_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1K</td><td>F0956115</td><td>COTTER PIN</td><td><input type="checkbox" name="material" value="COTTER PIN"></td><td><input type="number" name="COTTER PIN_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1L</td><td>L3611018</td><td>M10X1.5XNUT</td><td><input type="checkbox" name="material" value="M10X1.5XNUT"></td><td><input type="number" name="M10X1.5XNUT_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1M</td><td>L4011000</td><td>M10X NUT</td><td><input type="checkbox" name="material" value="M10X NUT"></td><td><input type="number" name="M10X NUT_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1N</td><td>FYK00911</td><td>M10X1.5XNUT</td><td><input type="checkbox" name="material" value="M10X1.5XNUT"></td><td><input type="number" name="M10X1.5XNUT_qty" min="0"></td></tr>
+      <tr><td>FT1</td><td>1O</td><td>FYL01011</td><td>M10X1.5X30</td><td><input type="checkbox" name="material" value="M10X1.5X30"></td><td><input type="number" name="M10X1.5X30_qty" min="0"></td></tr>
+
+    </table>
+
+    <input type="submit" value="Submit Request">
+  </form>
+
+  <script>
+    document.getElementById('requestForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const materials = form.querySelectorAll('input[type="checkbox"]');
+      let message = "Material Request:\n\n";
+
+      materials.forEach(checkbox => {
+        if (checkbox.checked) {
+          const name = checkbox.value;
+          const qty = form.elements[`${name}_qty`].value || 0;
+          message += `${name}: ${qty}\n`;
+        }
+      });
+
+      const mailtoLink = `mailto:joylin1606@gmail.com?subject=Material Request&body=${encodeURIComponent(message)}`;
+      window.location.href = mailtoLink;
+    });
+  </script>
+
+</body>
+</html>
